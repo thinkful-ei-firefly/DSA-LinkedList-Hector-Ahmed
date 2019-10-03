@@ -245,6 +245,56 @@ return currNode.value
   
 }
 
+function findMiddle (list) {
+  if (!list.head){
+    return null
+  }
+  else if (!list.head.next){
+    return list.head
+  }
+  else {
+    let fast = list.head;
+    let slow = list.head;
+
+    while ((fast !== null) && (fast.next !== null)){
+      fast  = fast.next.next
+      slow = slow.next
+    } 
+    return slow.value;
+  }
+}
+
+// function cycleList(list) {
+// if (!list.head) {
+//   return false;
+// }
+//  let listData = [];
+//  let currNode = list.head;
+//  let hasCycle = false;
+
+//  while (currNode !== null && !listData.includes(currNode.next)){
+//    listData.push(currNode);
+//    currNode = currNode.next;
+//    if (currNode !== null && listData.includes(currNode.next)) {
+//      hasCycle = true;
+//    }
+//  }
+// return hasCycle
+// }
+
+
+const cycleList = (list) => {
+  let previousNodes = [];
+  let tempNode = list.head
+  while (tempNode.next !== null) {
+    if (previousNodes.includes(tempNode.next)) {
+      return true
+    }
+    previousNodes.push(tempNode)
+    tempNode = tempNode.next
+  }
+  return false
+}
 
 function main() {
   const SLL = new LinkedList();
@@ -256,7 +306,17 @@ function main() {
   SLL.insertLast('Husker');
   SLL.insertLast('Starbuck');
   SLL.insertLast('Tauhida');
+
+
+const CycleList = new LinkedList();
+
+CycleList.insertFirst(1);
+CycleList.insertLast(2);
+CycleList.insertLast(3);
+CycleList.insertLast(4);
+
   
+// console.log(cycleList(CycleList));
 
   //SLL.remove('squirrel'); //Logs Item not found!
 
@@ -274,7 +334,9 @@ function main() {
   //  display(SLL);
   // console.log(reverseList(SLL));
   // display(SLL);
-  console.log(findThirdFromLast(SLL));
+  // console.log(findThirdFromLast(SLL));
+  // console.log(findMiddle(SLL));
+  
   
 }
 main();
