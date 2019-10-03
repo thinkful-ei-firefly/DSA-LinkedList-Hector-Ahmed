@@ -85,47 +85,85 @@ class DoublyLinkedList {
   }
   remove(item) {
     if (!this.head) {
-        return null;
+      return null;
     }
     if (this.head.value === item) {
-        this.head = this.head.next;
-        return;
+      this.head = this.head.next;
+      return;
     }
     let tempNode = this.head;
-    while ((tempNode.next !== null) && (tempNode.next.value !== item)) {
-        tempNode = tempNode.next;
+    while (tempNode.next !== null && tempNode.next.value !== item) {
+      tempNode = tempNode.next;
     }
     if (tempNode.next === null) {
-        console.log(`${item} not found`);
-        return;
+      console.log(`${item} not found`);
+      return;
     }
-    
-    tempNode.next.next.prev = tempNode
+
+    tempNode.next.next.prev = tempNode;
     tempNode.next = tempNode.next.next;
     return;
-}
+  }
 
-find(item) {
+  find(item) {
     //start at the head of LL
     let currNode = this.head;
 
     //If the LL is empty, return null
-    if(!this.head) {
-        return null;
+    if (!this.head) {
+      return null;
     }
 
     //loop through nodes in LL
-    while(currNode.value !== item) {
-        //check if at the end of the list, if so return null
-        if(currNode.next === null) {
-            return null;
-        }
-        else {
-            //otherwise update to next node
-            currNode = currNode.next;
-        }
+    while (currNode.value !== item) {
+      //check if at the end of the list, if so return null
+      if (currNode.next === null) {
+        return null;
+      } else {
+        //otherwise update to next node
+        currNode = currNode.next;
+      }
     }
 
     return currNode;
+  }
+  log() {
+    let tempNode = this.head;
+    while (tempNode !== null) {
+      console.log(tempNode.value);
+      tempNode = tempNode.next;
+    }
+  }
+  reverseDLL = list => {
+    let tempNode = list.head;
+    while (tempNode !== null) {
+      const next = tempNode.next;
+      tempNode.next = tempNode.prev;
+      tempNode.prev = next;
+      if (tempNode.prev === null) {
+        list.head = tempNode;
+      }
+      tempNode = next;
+    }
+    return list;
+  };
 }
-}
+
+mainDLL = () => {
+  let DLL = new DoublyLinkedList();
+
+  DLL.insertFirst('Aquaria');
+  DLL.insertLast('Caprica');
+  DLL.insertLast('Gemenon');
+  DLL.insertLast('Picon');
+  DLL.insertLast('Sagittaron');
+
+  DLL.insertLast('Tauron');
+  DLL.remove('Picon');
+
+  // console.log(DLL);
+  // console.log(DLL.find('Gemenon'))
+  console.log(reverseDLL(DLL));
+};
+
+mainDLL();
