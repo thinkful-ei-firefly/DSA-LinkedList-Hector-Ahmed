@@ -190,15 +190,73 @@ function findLast(list) {
   return currNode.value;
 }
 
+function WhatDoesThisProgramDo(lst) {
+  let current = lst.head;
+  while (current !== null) {
+      let newNode = current;
+      while (newNode.next !== null) {
+          if (newNode.next.value === current.value) {
+              newNode.next = newNode.next.next;
+          }
+          else {
+              newNode = newNode.next;
+          }
+      }
+      current = current.next;
+  }
+}
+
+
+
+// Mystery program
+// its looking for duplicate value, if it finds any, it will remove the duplicate value.
+// Time complexity of this algorithm is polynomial O(n^2). 
+
+function reverseList(list) {
+  if (!list.head) {
+    return null
+  }
+
+  let currNode = list.head;
+  let reversed = null;
+  
+while(currNode !== null) {
+  let tempNode = currNode.next ;
+  currNode.next = reversed;
+  reversed = currNode;
+  currNode = tempNode;
+}
+list.head = reversed;
+return list;
+}
+
+function findThirdFromLast(list) {
+  if  (!list.head || !list.head.next || !list.head.next.next) {
+    return null
+  }
+
+  let currNode = list.head;
+
+  while (currNode.next.next.next !== null) {
+    currNode = currNode.next
+  }
+
+return currNode.value
+  
+}
+
+
 function main() {
   const SLL = new LinkedList();
 
   SLL.insertFirst('Apollo');
-  SLL.insertFirst('Boomer');
+  SLL.insertLast('Boomer');
+  // SLL.insertLast('Tauhida');
   SLL.insertLast('Helo');
   SLL.insertLast('Husker');
   SLL.insertLast('Starbuck');
   SLL.insertLast('Tauhida');
+  
 
   //SLL.remove('squirrel'); //Logs Item not found!
 
@@ -208,9 +266,15 @@ function main() {
   //   SLL.remove('Tauhida');
 
   //display(SLL);
-  size(SLL);
-  console.log(isEmpty(SLL));
-  console.log(findPrevious('helo', SLL));
-  console.log(findLast(SLL));
+  // size(SLL);
+  // console.log(isEmpty(SLL));
+  // console.log(findPrevious('helo', SLL));
+  // console.log(findLast(SLL));
+  // console.log(WhatDoesThisProgramDo(SLL))
+  //  display(SLL);
+  // console.log(reverseList(SLL));
+  // display(SLL);
+  console.log(findThirdFromLast(SLL));
+  
 }
 main();
