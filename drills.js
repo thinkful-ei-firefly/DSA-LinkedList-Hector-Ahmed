@@ -140,21 +140,77 @@ class LinkedList {
   }
 }
 
+function display(list) {
+  let currNode = list.head;
+  if (!list.head) {
+    return null;
+  }
+  while (currNode !== null) {
+    console.log(currNode.value);
+    currNode = currNode.next;
+  }
+}
+
+function size(list) {
+  let currNode = list.head;
+  let counter = 0;
+  while (currNode !== null) {
+    counter++;
+    currNode = currNode.next;
+  }
+  console.log(counter);
+  return counter;
+}
+
+function isEmpty(list) {
+  return list.head === null;
+}
+
+function findPrevious(node, list) {
+  let currNode = list.head;
+  if (!list.head) {
+    return null;
+  }
+  while (currNode !== null) {
+    if (currNode.next.value !== node && currNode.next !== null) {
+      return currNode.value;
+    }
+    currNode = currNode.next;
+  }
+  console.log('item not found');
+  return null;
+}
+
+function findLast(list) {
+  let currNode = list.head;
+
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+  }
+  return currNode.value;
+}
+
 function main() {
   const SLL = new LinkedList();
 
   SLL.insertFirst('Apollo');
-  SLL.insertLast('Boomer');
+  SLL.insertFirst('Boomer');
   SLL.insertLast('Helo');
   SLL.insertLast('Husker');
   SLL.insertLast('Starbuck');
   SLL.insertLast('Tauhida');
 
-  SLL.remove('squirrel'); //Logs Item not found!
+  //SLL.remove('squirrel'); //Logs Item not found!
 
-  SLL.insertBefore('Athena', 'Boomer');
-  SLL.insertAfter('Hotdog', 'Helo');
-  SLL.insertAt('Kat', 3);
-  SLL.remove('Tauhida');
+  //   SLL.insertBefore('Athena', 'Boomer');
+  //   SLL.insertAfter('Hotdog', 'Helo');
+  //   SLL.insertAt('Kat', 3);
+  //   SLL.remove('Tauhida');
+
+  //display(SLL);
+  size(SLL);
+  console.log(isEmpty(SLL));
+  console.log(findPrevious('helo', SLL));
+  console.log(findLast(SLL));
 }
 main();
